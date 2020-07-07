@@ -1,5 +1,5 @@
 # Paladins_hero_rec
-Python package to recommend which hero one should select while drafting.
+Python package to recommend which hero a player should select while drafting.
 
 Author: Calvin M. Schmidt
 
