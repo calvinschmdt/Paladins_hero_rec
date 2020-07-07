@@ -31,6 +31,6 @@ Uses the Paladins API, the great work done by paladins.guru, and the awesome pyr
     - {'Grover': 0.2, 'Cassie': 0.25, 'Jenos': 0.3333333333333333, 'Seris': 0.3333333333333333, 'Talus': 0.3333333333333333, 'Moji': 0.35, 'Barik': 0.5, 'Grohk': 0.5, 'Lex': 0.5, 'Pip': 0.5, 'Ruckus': 0.5, 'Tyra': 0.5, 'Viktor': 0.5, "Mal'Damba": 0.5, 'Tiberius': 0.5, 'Torvald': 0.5, 'Ash': 0.75, 'Ying': 0.7692307692307693}
 
 ## Other tips:
-1. You can use on a phone by downloading an app to run Python - good for those who play on the computer.
+1. You can use on a phone by downloading an app to run Python - good for those who play on the computer. I use Pydroid 3, but anything with a command line should work.
 2. Tools for analyzing your past performance coming soon.
 3. Machine learning-based recommendation tool coming soon.
