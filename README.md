@@ -11,7 +11,7 @@ Required packages: pyrez, numpy, pickle - All can be installed using "pip instal
 
 Uses the Paladins API, the great work done by paladins.guru, and the awesome pyrez package developed by luissilva1044894 to pull down data on the player's past matches. During the draft portion of a casual or ranked match, the get_rec.py program can use this information to generate a recommendation based on the map, teammate heroes, and enemy heroes as to which hero the player should select based on their historical record encountering these conditions.
 
-## To get information on a players past matches:
+## To get information on a player's past matches:
 1. Use this form to request a developer key: https://fs12.formsite.com/HiRez/form48/secure_index.html
 2. Enter the required information into first cell of the "Get user data from API" notebook and run either the initial pull or update pull cells. Remember to make copies of the resulting match_list.pkl file!
 ### or
