@@ -25,9 +25,16 @@ for match in match_list:
     # Gets the champion of the player, the map, and whether they won.
     for i in match:
         if i['playerName'] == player_name:
-            win = int(i['Win_Status'] == 'Winner')
+            win_mult = 0
+            if i['Win_Status'] == 'Winner':
+                win = 1
+                win_mult = 1
+            elif i['Win_Status'] == 'Loser':
+                win = 0
+                win_mult = -1
             champion = i['Reference_Name']
             map_game = i['Map_Game']
+            pts = abs(i['Team1Score'] - i['Team2Score']) * win_mult
 
     # Adds the map to the map dictionary and records under the player's hero
     # whether they won or lost on that map.
@@ -38,7 +45,7 @@ for match in match_list:
         map_dict[map_out] = {}
     if champion not in map_dict[map_out]:
         map_dict[map_out][champion] = []
-    map_dict[map_out][champion].append(win)
+    map_dict[map_out][champion].append(pts)
 
     # Iterates through the non-player heroes.
     for i in match:
@@ -51,7 +58,7 @@ for match in match_list:
                     team_hero_dict[i['Reference_Name']] = {}
                 if champion not in team_hero_dict[i['Reference_Name']]:
                     team_hero_dict[i['Reference_Name']][champion] = []
-                team_hero_dict[i['Reference_Name']][champion].append(win)
+                team_hero_dict[i['Reference_Name']][champion].append(pts)
 
             # Adds the enemy hero to the enemy hero dictionary and records
             # under the player's hero whether they won or lost with that enemy hero.
@@ -60,7 +67,7 @@ for match in match_list:
                     enemy_hero_dict[i['Reference_Name']] = {}
                 if champion not in enemy_hero_dict[i['Reference_Name']]:
                     enemy_hero_dict[i['Reference_Name']][champion] = []
-                enemy_hero_dict[i['Reference_Name']][champion].append(win)
+                enemy_hero_dict[i['Reference_Name']][champion].append(pts)
 
 this_map = ''
 team_chars = []
@@ -116,6 +123,6 @@ while user_input != 'finish':
 
     # Outputs the current situation for a sanity check.
     print(this_map, team_chars, enemy_chars)
-    # Outputs the available characters, sorted by the historical win rate with the
+    # Outputs the available characters, sorted by the historical points advantage with the
     # current map, teammate heroes, and enemy heroes.
-    print({k: np.average(v) for k, v in sorted(char_dict.items(), key=lambda item: np.average(item[1]))})
+    print({k: round(np.average(v), 1) for k, v in sorted(char_dict.items(), key=lambda item: np.average(item[1]))})
