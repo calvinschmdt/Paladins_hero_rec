@@ -5,8 +5,8 @@ import numpy as np
 player_name = 'Wakamar'
 # ******** INSERT LIST OF AVAILABLE HEROES HERE ******
 owned = ['Ash', 'Barik', 'Cassie', 'Grohk', 'Grover', 'Jenos', 'Lex', 'Moji', 'Pip', 'Ruckus', 'Seris', 'Tyra',
-         'Viktor', 'Ying']
-free = ["Mal'Damba", 'Talus', 'Tiberius', 'Torvald']
+         'Viktor', 'Ying', "Mal'Damba"]
+free = ['Lian', 'Pip', 'Koga', 'Torvald']
 # ****************************************************
 
 # Get the list of past matches.
