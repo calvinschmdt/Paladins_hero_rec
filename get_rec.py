@@ -96,11 +96,11 @@ while user_input != 'finish':
     # Starts each available hero off at a 50% predicted win rate.
     char_dict = {}
     for i in owned:
-        char_dict[i] = [0, 1]
+        char_dict[i] = [0]
 
     for i in free:
         if i not in char_dict:
-            char_dict[i] = [0, 1]
+            char_dict[i] = [0]
 
     # For each available hero, looks through that hero's history with the
     # current map, teammate heroes, and enemy heroes. Weights the map twice as
