@@ -4,9 +4,9 @@ import numpy as np
 # *********** INSERT YOUR PLAYER NAME HERE ***********
 player_name = 'Wakamar'
 # ******** INSERT LIST OF AVAILABLE HEROES HERE ******
-owned = ['Ash', 'Barik', 'Cassie', 'Grohk', 'Grover', 'Jenos', 'Lex', 'Moji', 'Pip', 'Ruckus', 'Seris', 'Tyra',
-         'Viktor', 'Ying', "Mal'Damba"]
-free = ['Lian', 'Pip', 'Koga', 'Torvald']
+front_line = ['Ash', 'Barik', 'Inara', 'Ruckus']
+dps = ['Tyra', 'Lian', 'Cassie', 'Buck', 'Moji', 'Lex']
+support = ['Ying', 'Jenos', 'Grover', 'Furia', 'Pip']
 # ****************************************************
 
 # Get the list of past matches.
@@ -95,10 +95,14 @@ while user_input != 'finish':
 
     # Starts each available hero off at a 50% predicted win rate.
     char_dict = {}
-    for i in owned:
+    for i in front_line:
         char_dict[i] = [0]
 
-    for i in free:
+    for i in dps:
+        if i not in char_dict:
+            char_dict[i] = [0]
+
+    for i in support:
         if i not in char_dict:
             char_dict[i] = [0]
 
@@ -108,8 +112,8 @@ while user_input != 'finish':
     for i in char_dict:
         if this_map in map_dict:
             if i in map_dict[this_map]:
-                char_dict[i].extend(map_dict[this_map][i])
-                char_dict[i].extend(map_dict[this_map][i])
+                for j in range(4):
+                    char_dict[i].extend(map_dict[this_map][i])
 
         for j in team_chars:
             if j in team_hero_dict:
@@ -125,4 +129,32 @@ while user_input != 'finish':
     print(this_map, team_chars, enemy_chars)
     # Outputs the available characters, sorted by the historical points advantage with the
     # current map, teammate heroes, and enemy heroes.
-    print({k: round(np.average(v), 1) for k, v in sorted(char_dict.items(), key=lambda item: np.average(item[1]))})
+    sorted_list = [(k, round(np.average(v), 1)) for k, v in \
+                   sorted(char_dict.items(), key=lambda item: np.average(item[1]), \
+                          reverse=True)]
+
+    labels = ['1st place', '2nd place', '3rd place']
+    reported = []
+    count = 0
+    while count < 3:
+        for i in sorted_list:
+            if i[0] not in reported and i[0] not in team_chars and i[0] not in enemy_chars:
+                print(labels[count] + ' - ' + i[0] + ': ' + str(i[1]))
+                count += 1
+                reported.append(i[0])
+                break
+
+    for i in sorted_list:
+        if i[0] in front_line and i[0] not in team_chars and i[0] not in enemy_chars:
+            print('Top Front Line - ' + i[0] + ': ' + str(i[1]))
+            break
+
+    for i in sorted_list:
+        if i[0] in dps and i[0] not in team_chars and i[0] not in enemy_chars:
+            print('Top DPS - ' + i[0] + ': ' + str(i[1]))
+            break
+
+    for i in sorted_list:
+        if i[0] in support and i[0] not in team_chars and i[0] not in enemy_chars:
+            print('Top Support - ' + i[0] + ': ' + str(i[1]))
+            break
